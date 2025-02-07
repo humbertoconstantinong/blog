@@ -28,14 +28,21 @@
          
         </ul>
       </li>
-      <li nz-submenu nzOpen nzTitle="Conta" nzIcon="user">
+      <li nz-submenu nzOpen [nzTitle]="name" nzIcon="user">
         <ul>
-          <li (click)="login()" nz-menu-item nzMatchRouter>
+          
+          @if(logged){
+            <li (click)="newArticle()" nz-menu-item nzMatchRouter>
+              <a>Criar artigo</a>
+            </li>
+            <li (click)="logout()" nz-menu-item nzMatchRouter>
+              <a>Logout</a>
+            </li>
+          }@else {
+            <li (click)="login()" nz-menu-item nzMatchRouter>
             <a>Login</a>
           </li>
-          <li (click)="newArticle()" nz-menu-item nzMatchRouter>
-            <a>Criar artigo</a>
-          </li>
+        }
         </ul>
       </li>
     </ul>

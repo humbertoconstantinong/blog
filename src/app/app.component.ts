@@ -14,10 +14,29 @@ import { LoginModalComponent } from './shared/login-modal/login-modal';
 })
 export class AppComponent {
   isCollapsed = false;
-
   openModal =  false;
   openModalLogin =  false;
   isLogin = false;
+  logged = false;
+  name = 'Conta'
+  ngOnInit(){
+    if (localStorage.getItem('user') !== null) {
+      this.logged = true;
+  } else {
+      this.logged = false;
+  }
+  let user: User
+  user = JSON.parse(localStorage.getItem('user') || '');
+  if (user) {
+    this.logged = true;
+    this.name = user.data.user.user_metadata?.username
+} else {
+  this.name = 'Conta'
+    this.logged = false;
+}
+console.log(this.name)
+  }
+
 
 
   newArticle(){
@@ -26,8 +45,43 @@ export class AppComponent {
   login(){
     this.openModalLogin = true;
   }
+  logout(){
+    localStorage.clear();
+    if (localStorage.getItem('user') !== null) {
+      this.logged = true;
+    } else {
+    this.name = 'Conta'
+      this.logged = false;
+  }
+    
+  }
   closeModal(){
     this.openModal = false;
     this.openModalLogin = false;
+    let user: User
+    user = JSON.parse(localStorage.getItem('user') || '');
+    console.log(user)
+    if (user) {
+      this.logged = true;
+      this.name = user.data.user.user_metadata.username
+  } else {
+    this.name = 'Conta'
+      this.logged = false;
+  }
+
   }
 }
+
+interface UserMetadata {
+  username: string;
+}
+
+interface User {
+  data: {
+    user: User2;
+  };
+}
+interface User2 {
+  user_metadata: UserMetadata;
+}
+

@@ -4,10 +4,15 @@
   nzCentered
   (nzOnCancel)="handleCancelMiddle()"
   (nzOnOk)="handleOkMiddle()"
-  [nzWidth]="'400px'"
+  [nzWidth]="'500px'"
 >
   <ng-container *nzModalContent>
     <div nz-row nzJustify="center" nzAlign="middle">
+      @if(spin){
+        <nz-spin nzSimple></nz-spin>
+      }@else {
+
+      
       <form
         nz-col
         nzSpan="12"
@@ -30,6 +35,8 @@
           </nz-form-control>
         </nz-form-item>
       </form>
+    }
     </div>
+    
   </ng-container>
 </nz-modal>
