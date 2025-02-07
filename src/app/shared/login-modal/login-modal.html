@@ -1,0 +1,35 @@
+<nz-modal
+  [(nzVisible)]="openModal"
+  nzTitle="Entrar no sistema"
+  nzCentered
+  (nzOnCancel)="handleCancelMiddle()"
+  (nzOnOk)="handleOkMiddle()"
+  [nzWidth]="'400px'"
+>
+  <ng-container *nzModalContent>
+    <div nz-row nzJustify="center" nzAlign="middle">
+      <form
+        nz-col
+        nzSpan="12"
+        nz-form
+        [nzLayout]="'vertical'"
+        [formGroup]="validateForm"
+      >
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your username!">
+            <nz-input-group nzPrefixIcon="user">
+              <input formControlName="username" nz-input placeholder="username" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your Password!">
+            <nz-input-group nzPrefixIcon="lock">
+              <input formControlName="password" nz-input type="password" placeholder="Password" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    </div>
+  </ng-container>
+</nz-modal>

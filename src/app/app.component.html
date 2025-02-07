@@ -1,3 +1,4 @@
+@if(!isLogin){
 <nz-layout class="app-layout">
   <nz-sider class="menu-sidebar"
     nzCollapsible
@@ -27,8 +28,11 @@
          
         </ul>
       </li>
-      <li nz-submenu nzOpen nzTitle="Administrador" nzIcon="user">
+      <li nz-submenu nzOpen nzTitle="Conta" nzIcon="user">
         <ul>
+          <li (click)="login()" nz-menu-item nzMatchRouter>
+            <a>Login</a>
+          </li>
           <li (click)="newArticle()" nz-menu-item nzMatchRouter>
             <a>Criar artigo</a>
           </li>
@@ -53,3 +57,5 @@
 </nz-layout>
 
 <app-new-article (closeModal)="closeModal()" [openModal]="openModal"></app-new-article>
+<app-login (closeModal)="closeModal()" [openModal]="openModalLogin"></app-login>
+}
