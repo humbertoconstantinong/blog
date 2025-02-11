@@ -1,0 +1,23 @@
+@for(article of articles; track article){
+  <nz-card style="width: 100%; height: 70vh" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+    <nz-skeleton [nzActive]="true" [nzLoading]="loading" [nzAvatar]="{ size: 'large' }">
+      <nz-card-meta
+      [nzAvatar]="avatarTemplate"
+      nzTitle="{{article.title}}"
+      nzDescription="{{article.description}}"
+      ></nz-card-meta>
+    </nz-skeleton>
+  </nz-card>
+}
+  <ng-template #avatarTemplate>
+    <nz-avatar nzSrc="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
+  </ng-template>
+  <ng-template #actionSetting>
+    <nz-icon nzType="setting" />
+  </ng-template>
+  <ng-template #actionEdit>
+    <nz-icon nzType="edit" />
+  </ng-template>
+  <ng-template #actionEllipsis>
+  <nz-icon nzType="ellipsis" />
+</ng-template>

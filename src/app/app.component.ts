@@ -5,6 +5,7 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NewArticleModal } from './shared/new-article-modal/new-article-modal.component';
 import { LoginModalComponent } from './shared/login-modal/login-modal';
+import { StateService } from './service/state.service';
 
 @Component({
   selector: 'app-root',
@@ -37,7 +38,9 @@ export class AppComponent {
 console.log(this.name)
   }
 
+constructor(private stateService: StateService){
 
+}
 
   newArticle(){
     this.openModal = true;
@@ -58,6 +61,7 @@ console.log(this.name)
   closeModal(){
     this.openModal = false;
     this.openModalLogin = false;
+    this.stateService.closeModal();
     let user: User
     user = JSON.parse(localStorage.getItem('user') || '');
     console.log(user)

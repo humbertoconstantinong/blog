@@ -1,13 +1,18 @@
 <nz-modal
       [(nzVisible)]="openModal"
-      nzTitle="Vertically centered modal dialog"
+      nzTitle="Criar novo artigo"
       nzCentered
       (nzOnCancel)="handleCancelMiddle()"
-      (nzOnOk)="handleOkMiddle()"
+      (nzOnOk)="createArticle()"
     >
       <ng-container *nzModalContent>
-        <p>some contents...</p>
-        <p>some contents...</p>
-        <p>some contents...</p>
+        <form [formGroup]="validateForm" class="items">
+
+          <nz-input-group >
+            <input formControlName="title" nz-input placeholder="Título" />
+          </nz-input-group>
+          
+          <textarea formControlName="description" nz-input placeholder="Descrição do artigo" [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+        </form>
       </ng-container>
     </nz-modal>

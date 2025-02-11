@@ -6,4 +6,5 @@ export const routes: Routes = [
   { path: 'youtube', loadChildren: () => import('./pages/youtube/youtube.routes').then(m => m.YOUTUBE_ROUTES), },
   { path: 'articles', loadChildren: () => import('./pages/articles/articles.routes').then(m => m.ARTICLES_ROUTES), },
   { path: 'login', loadChildren: () => import('./shared/login-modal/login-modal.routes').then(m => m.LOGIN_MODAL_ROUTES), },
+  { path: 'detail-article', loadChildren: () => import('./pages/detail-article/detail-article.routes').then(m => m.DETAIL_ARTICLES_ROUTES), },
 ];

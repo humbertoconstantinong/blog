@@ -1,1 +1,17 @@
-<p>articles works!</p>
+@for(article of articles; track article){
+    <nz-card style="width: 1000px;margin-top: 16px; cursor: pointer;" [nzLoading]="loading"  [routerLink]="['/detail-article', article.id]">
+      <nz-card-meta
+        [nzAvatar]="avatarTemplate"
+        nzTitle={{article.title}}
+        nzDescription="{{article.description}}"
+      >
+    </nz-card-meta>
+  </nz-card>
+  <ng-template #avatarTemplate>
+    <nz-avatar nzSrc="https://banner2.cleanpng.com/20180701/rht/aawhe11a6.webp"></nz-avatar>
+  </ng-template>
+  <ng-template #actionEdit>
+    <nz-icon nzType="edit" />
+  </ng-template>
+  <button style="background-color: aqua;" (click)="removeArticle(article)">APAGAR</button>
+}
