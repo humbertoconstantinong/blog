@@ -6,34 +6,49 @@ import { Database } from '../database.types';
 import { Article } from '../models/article';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ArticlesService {
+  constructor() {}
 
-  constructor() { }
- 
-   supabase = createClient<Database>(environment.supabaseUrl, environment.supabaseKey);
+  supabase = createClient<Database>(
+    environment.supabaseUrl,
+    environment.supabaseKey
+  );
 
-  
-   getArticles(): Observable<Article[] | null> {
-    const promise = this.supabase.from('Article').select('*').order('created_at', { ascending: false }).returns<Article[]>();
-    return from(promise).pipe(map(response => response.data));
+  getArticles(): Observable<Article[] | null> {
+    const promise = this.supabase
+      .from('Article')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .returns<Article[]>();
+    return from(promise).pipe(map((response) => response.data));
   }
-   getArticleById(id: number): Observable<Article[] | null> {
-    const promise = this.supabase.from('Article').select('*').match({id: id}).returns<Article[]>();
-    return from(promise).pipe(map(response => response.data));
+  getArticleById(id: number): Observable<Article[] | null> {
+    const promise = this.supabase
+      .from('Article')
+      .select('*')
+      .match({ id: id })
+      .returns<Article[]>();
+    return from(promise).pipe(map((response) => response.data));
   }
 
-   newArticle(payload: any): Observable<any>{
-    const promise = this.supabase.from('Article').insert(payload).select('*').single();
+  newArticle(payload: any): Observable<any> {
+    const promise = this.supabase
+      .from('Article')
+      .insert(payload)
+      .select('*')
+      .single();
 
-    return from(promise).pipe(map((result) => {
-      result.data
-    }));
-   }
+    return from(promise).pipe(
+      map((result) => {
+        result.data;
+      })
+    );
+  }
 
-   removeArticle(id: number): Observable<void>{
-    const promise = this.supabase.from('Article').delete().match({id: id})
-    return from(promise).pipe(map(()=>{}))
-   }
+  removeArticle(id: number): Observable<void> {
+    const promise = this.supabase.from('Article').delete().match({ id: id });
+    return from(promise).pipe(map(() => {}));
+  }
 }

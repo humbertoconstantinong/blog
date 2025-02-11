@@ -14,35 +14,42 @@ import { RouterLink } from '@angular/router';
   selector: 'app-articles',
   templateUrl: './articles.component.html',
   styleUrl: './articles.component.scss',
-  imports: [FormsModule, NzCardModule, NzAvatarModule, NzIconModule, NzSwitchModule, NzSkeletonModule, RouterLink]
+  imports: [
+    FormsModule,
+    NzCardModule,
+    NzAvatarModule,
+    NzIconModule,
+    NzSwitchModule,
+    NzSkeletonModule,
+    RouterLink,
+  ],
 })
 export class ArticlesComponent {
   constructor(private stateService: StateService) {}
-  articles : Array<Article> = []
-  articleService = inject(ArticlesService)
+  articles: Array<Article> = [];
+  articleService = inject(ArticlesService);
   loading = true;
-  ngOnInit(){
+  ngOnInit() {
     this.loadArtigos();
-    this.stateService.modalClosed$.subscribe(isClosed => {
+    this.stateService.modalClosed$.subscribe((isClosed) => {
       if (isClosed) {
-        this.loadArtigos(); 
+        this.loadArtigos();
       }
     });
-   }
+  }
 
-   loadArtigos(){
-    this.articleService.getArticles().subscribe((res)=>{
-      if(res){
+  loadArtigos() {
+    this.articleService.getArticles().subscribe((res) => {
+      if (res) {
         this.articles = res;
         this.loading = false;
       }
     });
-   }
+  }
 
-   removeArticle(id: any){
-    this.articleService.removeArticle(id.id).subscribe(()=>{
+  removeArticle(id: any) {
+    this.articleService.removeArticle(id.id).subscribe(() => {
       this.loadArtigos();
     });
-   }
+  }
 }
-

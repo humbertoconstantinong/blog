@@ -1,6 +1,7 @@
 @if(!isLogin){
 <nz-layout class="app-layout">
-  <nz-sider class="menu-sidebar"
+  <nz-sider
+    class="menu-sidebar"
     nzCollapsible
     nzWidth="256px"
     nzBreakpoint="md"
@@ -9,11 +10,16 @@
   >
     <div class="sidebar-logo">
       <a href="http://youtube.com/@flashfrontend" target="_blank">
-        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo" />
         <h1>Flash Frontend</h1>
       </a>
     </div>
-    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+    <ul
+      nz-menu
+      nzTheme="dark"
+      nzMode="inline"
+      [nzInlineCollapsed]="isCollapsed"
+    >
       <li nz-submenu nzOpen nzTitle="Artigos" nzIcon="align-left">
         <ul>
           <li nz-menu-item nzMatchRouter>
@@ -25,24 +31,22 @@
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/youtube">Youtube</a>
           </li>
-         
         </ul>
       </li>
       <li nz-submenu nzOpen [nzTitle]="name" nzIcon="user">
         <ul>
-          
           @if(logged){
-            <li (click)="newArticle()" nz-menu-item nzMatchRouter>
-              <a>Criar artigo</a>
-            </li>
-            <li (click)="logout()" nz-menu-item nzMatchRouter>
-              <a>Logout</a>
-            </li>
+          <li (click)="newArticle()" nz-menu-item nzMatchRouter>
+            <a>Criar artigo</a>
+          </li>
+          <li (click)="logout()" nz-menu-item nzMatchRouter>
+            <a>Logout</a>
+          </li>
           }@else {
-            <li (click)="login()" nz-menu-item nzMatchRouter>
+          <li (click)="login()" nz-menu-item nzMatchRouter>
             <a>Login</a>
           </li>
-        }
+          }
         </ul>
       </li>
     </ul>
@@ -51,7 +55,10 @@
     <nz-header>
       <div class="app-header">
         <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-          <nz-icon class="trigger" [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" />
+          <nz-icon
+            class="trigger"
+            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+          />
         </span>
       </div>
     </nz-header>
@@ -63,6 +70,9 @@
   </nz-layout>
 </nz-layout>
 
-<app-new-article (closeModal)="closeModal()" [openModal]="openModal"></app-new-article>
+<app-new-article
+  (closeModal)="closeModal()"
+  [openModal]="openModal"
+></app-new-article>
 <app-login (closeModal)="closeModal()" [openModal]="openModalLogin"></app-login>
 }

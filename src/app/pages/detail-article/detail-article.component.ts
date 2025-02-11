@@ -14,30 +14,35 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'app-detail-articles',
   templateUrl: './detail-article.component.html',
   styleUrl: './detail-article.component.scss',
-  imports: [FormsModule, NzAvatarModule, NzCardModule, NzIconModule, NzSwitchModule, NzSkeletonModule]
+  imports: [
+    FormsModule,
+    NzAvatarModule,
+    NzCardModule,
+    NzIconModule,
+    NzSwitchModule,
+    NzSkeletonModule,
+  ],
 })
 export class DetailArticlesComponent {
-  constructor(private route: ActivatedRoute,) {}
-  articles : Array<Article> = []
-  articleService = inject(ArticlesService)
+  constructor(private route: ActivatedRoute) {}
+  articles: Array<Article> = [];
+  articleService = inject(ArticlesService);
   loading = true;
-  ngOnInit(){
+  ngOnInit() {
     const articleId = this.route.snapshot.paramMap.get('id');
-    this.loadArtigo(articleId)
-   }
+    this.loadArtigo(articleId);
+  }
 
-   loadArtigo(id: any){
-    this.articleService.getArticleById(id).subscribe((res)=>{
-      if(res){
+  loadArtigo(id: any) {
+    this.articleService.getArticleById(id).subscribe((res) => {
+      if (res) {
         this.articles = res;
         this.loading = false;
       }
     });
-   }
+  }
 
-   removeArticle(id: any){
-    this.articleService.removeArticle(id.id).subscribe(()=>{
-    });
-   }
+  removeArticle(id: any) {
+    this.articleService.removeArticle(id.id).subscribe(() => {});
+  }
 }
-

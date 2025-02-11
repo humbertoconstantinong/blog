@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Route, Router, RouterLink, RouterOutlet } from '@angular/router';
+import {
+  ActivatedRoute,
+  Route,
+  Router,
+  RouterLink,
+  RouterOutlet,
+} from '@angular/router';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
@@ -9,70 +15,74 @@ import { StateService } from './service/state.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterLink, RouterOutlet, NzIconModule, NzLayoutModule, NzMenuModule, NewArticleModal, LoginModalComponent],
+  imports: [
+    RouterLink,
+    RouterOutlet,
+    NzIconModule,
+    NzLayoutModule,
+    NzMenuModule,
+    NewArticleModal,
+    LoginModalComponent,
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   isCollapsed = false;
-  openModal =  false;
-  openModalLogin =  false;
+  openModal = false;
+  openModalLogin = false;
   isLogin = false;
   logged = false;
-  name = 'Conta'
-  ngOnInit(){
+  name = 'Conta';
+  ngOnInit() {
     if (localStorage.getItem('user') !== null) {
       this.logged = true;
-  } else {
+    } else {
       this.logged = false;
+    }
+    let user: User;
+    user = JSON.parse(localStorage.getItem('user') || '');
+    if (user) {
+      this.logged = true;
+      this.name = user.data.user.user_metadata?.username;
+    } else {
+      this.name = 'Conta';
+      this.logged = false;
+    }
+    console.log(this.name);
   }
-  let user: User
-  user = JSON.parse(localStorage.getItem('user') || '');
-  if (user) {
-    this.logged = true;
-    this.name = user.data.user.user_metadata?.username
-} else {
-  this.name = 'Conta'
-    this.logged = false;
-}
-console.log(this.name)
-  }
 
-constructor(private stateService: StateService){
+  constructor(private stateService: StateService) {}
 
-}
-
-  newArticle(){
+  newArticle() {
     this.openModal = true;
   }
-  login(){
+  login() {
     this.openModalLogin = true;
   }
-  logout(){
+  logout() {
     localStorage.clear();
     if (localStorage.getItem('user') !== null) {
       this.logged = true;
     } else {
-    this.name = 'Conta'
+      this.name = 'Conta';
       this.logged = false;
+    }
   }
-    
-  }
-  closeModal(){
+  closeModal() {
     this.openModal = false;
     this.openModalLogin = false;
     this.stateService.closeModal();
-    let user: User
+    let user: User;
     user = JSON.parse(localStorage.getItem('user') || '');
-    console.log(user)
+    console.log(user);
     if (user) {
       this.logged = true;
-      this.name = user.data.user.user_metadata.username
-  } else {
-    this.name = 'Conta'
+      this.name = user.data.user.user_metadata.username;
+    } else {
+      this.name = 'Conta';
       this.logged = false;
-  }
-
+    }
   }
 }
 
@@ -88,4 +98,3 @@ interface User {
 interface User2 {
   user_metadata: UserMetadata;
 }
-
